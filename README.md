@@ -9,7 +9,7 @@ Networking tools created with Python.
 
 ⚠️ **Please consider using port scanner for educational purposes only. Using it to scan websites or IP addresses without permission can be seen as a crime.**
 
-# Install
+## Install
 Install the required packages using the command below:
 
 `pip install -r requirements.txt`
