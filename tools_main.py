@@ -120,6 +120,5 @@ def Home():
         option_5()
 
 
-if __name__ == "__main__":
-    Display_Menu()
-    Home()
+Display_Menu()
+Home()
