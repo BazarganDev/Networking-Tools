@@ -120,5 +120,8 @@ def Home():
         option_5()
 
 
-Display_Menu()
-Home()
+def Start_Program():
+    Display_Menu()
+    Home()
+
+Start_Program()
