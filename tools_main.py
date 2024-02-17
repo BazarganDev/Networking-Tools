@@ -21,8 +21,9 @@ def Display_Menu():
         [1] Locate an IP address
         [2] Get the IP address of a domain
         [3] Ping a host or IP address
-        [4] Port Scanner
-        [5] Exit
+        [4] Network Scanner
+        [5] Port Scanner
+        [6] Exit
     
     * Type <clear> to clear previous commands
     * Type <q> or to abort operation of a tool
@@ -62,16 +63,25 @@ def option_3():
 
 def option_4():
     """
-    Option 4 --> Port Scanner
+    Option 4 --> Network Scanner
     """
-    tools.port_scanner()
+    tools.network_scanner()
     Display_Menu()
     Home()
 
 
 def option_5():
     """
-    Option 5 --> Exit
+    Option 5 --> Port Scanner
+    """
+    tools.port_scanner()
+    Display_Menu()
+    Home()
+
+
+def option_6():
+    """
+    Option 6 --> Exit
     """
     quit()
 
@@ -82,7 +92,7 @@ def Home():
     Home of the program is selecting an option from available options.
     """
     # Available options' numbers as shown in the menu
-    available_options = (1, 2, 3, 4, 5)
+    available_options = (1, 2, 3, 4, 5, 6)
     # Get the option's number.
     # If it is wrong, this while loop will run unless it gets
     # a proper number that is related with one of the available options.
@@ -118,6 +128,8 @@ def Home():
         option_4()
     elif selected_option == 5:
         option_5()
+    elif selected_option == 6:
+        option_6()
 
 
 def Start_Program():
