@@ -1,2 +1,4 @@
 requests
 pyfiglet
+socket
+scapy
