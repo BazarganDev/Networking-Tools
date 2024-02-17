@@ -26,6 +26,7 @@ So if a port is not open, it will not show it on the screen.
 
 
 # Import necessary modules
+import scapy.all as scapy
 import subprocess
 import platform
 import requests
@@ -50,7 +51,10 @@ def locate_ip():
     Locate an IP address using an API.
     """
     # Clear up the terminal.
-    subprocess.call("cls", shell=True)
+    if platform.system().lower() == 'windows':
+        subprocess.call("cls", shell=True)
+    else:
+        subprocess.call("clear", shell=True)
     # Banner of the tool.
     banner = pyfiglet.figlet_format("IP LOCATER")
     print(banner)
@@ -69,7 +73,10 @@ def locate_ip():
         else:
             break
     # Change current working directory to system's desktop
-    os.chdir(rf"C:\Users\{os.getlogin()}\Desktop")
+    if platform.system().lower() == 'windows':
+        os.chdir(rf"C:\Users\{os.getlogin()}\Desktop")
+    else:
+        os.chdir(rf"~/Desktop")
     # File names containing data of the IP address.
     file_name_json = "ip_data.json"
     file_name_text = "ip_data.txt"
@@ -94,7 +101,10 @@ def get_ip():
     """
     Get the IP address of a certain domain name.
     """
-    subprocess.call("cls", shell=True)
+    if platform.system().lower() == 'windows':
+        subprocess.call("cls", shell=True)
+    else:
+        subprocess.call("clear", shell=True)
     # Banner of the tool.
     banner = pyfiglet.figlet_format("IP FINDER")
     print(banner)
@@ -114,7 +124,10 @@ def ping():
     """
     Ping a domain or website or IP address.
     """
-    subprocess.call("cls", shell=True)
+    if platform.system().lower() == 'windows':
+        subprocess.call("cls", shell=True)
+    else:
+        subprocess.call("clear", shell=True)
     # Banner of the tool.
     banner = pyfiglet.figlet_format("PING")
     print(banner)
@@ -141,7 +154,10 @@ def port_scanner():
     """
     Scan ports on a certain host.
     """
-    subprocess.call("cls", shell=True)
+    if platform.system().lower() == 'windows':
+        subprocess.call("cls", shell=True)
+    else:
+        subprocess.call("clear", shell=True)
     # Banner of the tool.
     banner = pyfiglet.figlet_format("PORT SCANNER")
     print(banner)
@@ -211,3 +227,35 @@ def port_scanner():
     print("Time taken: ", time_taken)
     print("_"*60)
     input("\nPress any key to continue...")
+
+
+def network_scanner():
+    """
+    Scan a range of IP addresses for open ports.
+    """
+    if platform.system().lower() == 'windows':
+        subprocess.call("cls", shell=True)
+    else:
+        subprocess.call("clear", shell=True)
+    # Banner of the tool.
+    banner = pyfiglet.figlet_format("NETWORK SCANNER")
+    print(banner)
+    # Get the IP address from the input.
+    host = input("Enter an IP address or a domain name:\n>>> ")
+    hostIP = socket.gethostbyname(host)
+    # Send ARP requests to a range of IP address.
+    arp_request = scapy.ARP(pdst=hostIP)
+    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+    arp_request_broadcast = broadcast / arp_request
+    returned_list = scapy.srp(arp_request_broadcast, timeout=1, verbose=False)[0]
+    # Collect the IP and MAC addresses of the devices that respond.
+    results = []
+    for element in returned_list:
+        result = {"ip": element[1].psrc, "mac": element[1].hwsrc}
+        results.append(result)
+    # Display the results, including the IP and MAC addresses of the devices.
+    print("_"*60)
+    print("IP Address\t\tMAC Address")
+    print("_"*60)
+    for result in results:
+        print(f"{result['ip']}\t----------\t{result['mac']}")
