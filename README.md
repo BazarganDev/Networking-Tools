@@ -6,8 +6,9 @@ Networking tools created with Python.
 -  IP Finder
 -  Ping
 -  Port Scanner
+-  Network Scanner
 
-⚠️ **Please consider using port scanner for educational purposes only. Using it to scan websites or IP addresses without permission can be seen as a crime.**
+⚠️ **Please consider using port scanner and network scanner for EDUCATIONAL PURPOSES ONLY. Using it to scan websites or IP addresses without the permission of the owner can be seen as a crime.**
 
 ## How to run
 Clone this repository using Git:
@@ -19,6 +20,3 @@ Install the required packages using the command below:
 `pip install -r requirements.txt`
 
 Run the `tools_main.py`
-
-## Screenshot
-![screen](https://github.com/BazarganDev/Networking-Tools/assets/124906353/bb27907e-d268-47b8-aec5-8deae025ebba)
