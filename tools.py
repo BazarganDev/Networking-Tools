@@ -204,19 +204,29 @@ def port_scanner():
     print("_"*60)
     print("\nPort\t\t\tStatus\n")
     # Start scanning ports
-    for port in range(int(port_range[0]), int(port_range[1])+1):
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        # Timeout time for scanning each port is half a second.
-        s.settimeout(0.5)
-        connection = s.connect_ex((hostIP, port))
-        # Check whether the port is open or not.
-        # If it is open, print it.
-        # If it is not open, pass the closed port.
-        if connection == 0:
-            print(f"{port}\t----------\tOpen")
-        else:
-            pass
-        s.close()
+    try:
+        for port in range(int(port_range[0]), int(port_range[1])+1):
+            s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            # Timeout time for scanning each port is half a second.
+            s.settimeout(0.5)
+            connection = s.connect_ex((hostIP, port))
+            # Check whether the port is open or not.
+            # If it is open, print it.
+            # If it is not open, pass the closed port.
+            if connection == 0:
+                print(f"{port}\t----------\tOpen")
+            else:
+                pass
+            s.close()
+    except KeyboardInterrupt:
+        print("\nOperation interrupted by user.\nAborting program.")
+        quit()
+    except socket.gaierror:
+        print("Host name could not be resolved.\nAborting prograrm.")
+        quit()
+    except :
+        print("\nCouldn't connect to the server.\nAborting program.")
+        quit()
     # Scan ending time.
     end_time = datetime.datetime.now()
     # Time taken to scan.
